@@ -1,0 +1,22 @@
+-- TIME TRAVEL
+-- What the report demonstrates: the S3 folder silver/delta/.../_delta_log/
+-- contains one JSON file per committed version (00000000000000000000.json,
+-- 00000000000000000001.json, ...) plus .crc checksum files. That log is what
+-- makes versioned reads and ACID commits possible.
+--
+-- The report does NOT show a time-travel SQL statement, so nothing below was
+-- executed in the POC. These are illustrative examples [RECOMMENDED].
+
+-- Spark SQL / PySpark (e.g. in a Glue notebook with Delta enabled):
+--   DESCRIBE HISTORY delta.`s3://<bucket>/silver/delta/insurance_claims/`;
+--   SELECT * FROM delta.`s3://<bucket>/silver/delta/insurance_claims/` VERSION AS OF 0;
+--   spark.read.format("delta").option("versionAsOf", 0).load("s3://<bucket>/silver/delta/insurance_claims/")
+--
+-- Athena: check the current AWS documentation for time-travel support on
+-- Delta tables before relying on it. The report lists Athena time travel as
+-- a capability but does not include a query.
+--
+-- Plain-SQL alternative that IS supported by the POC design: query the
+-- history table (insurance_claims_history) registered the same way as the
+-- current-state table, for the full audit trail of a claim:
+--   SELECT * FROM claims_history_table WHERE claim_id = 'CLM_1000' ORDER BY updated_at;

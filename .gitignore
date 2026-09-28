@@ -1,0 +1,42 @@
+# Secrets & local config  (NEVER commit these)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials
+credentials.*
+secrets
+secrets.*
+*.secret
+.aws/
+aws-exports*.json
+iam-policy-export*.json
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# Logs & OS / editor files
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Generated sample data (regenerate with the generator script)
+data/sample/*.csv
+data/sample/*.json
+!data/sample/.gitkeep
+
+# Unsanitized report / raw screenshots
+reports/*.pdf
+!reports/project-report.pdf
+screenshots/_raw/

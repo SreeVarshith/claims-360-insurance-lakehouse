@@ -1,0 +1,8 @@
+# ── LOCAL (needed to run the code in this repo on your machine) ──────
+pandas>=1.5        # src/data_generation/generate_dataset.py
+boto3>=1.26        # optional locally; src/lambda/trigger_glue_job.py (Lambda already provides boto3)
+
+# ── AWS GLUE 4.0 RUNTIME (do NOT pip install; provided by Glue) ──────
+# pyspark, awsglue, delta-spark   -> enabled with the job parameter:
+#                                    --datalake-formats delta
+# org.postgresql.Driver (JDBC)    -> available in the Glue runtime
